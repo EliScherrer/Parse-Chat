@@ -8,13 +8,13 @@ Time spent: **X** hours spent in total
 
 The following **required** user stories are complete:
 
-- [ ] User can sign up and sign in to the login screen (+1pt)
+- [X] User can sign up and sign in to the login screen (+1pt)
 - [ ] User sees alerts for login exceptions, i.e. "account already exists", "wrong credentials", etc. (+1pt)
 - [ ] User can compose and send chat messages (+2pt)
 - [ ] User can view a list of chat messages in chronological order (+2pt)
 - [ ] Automatically Adjust Cell Size to Fit Text (+1pt)
 - [ ] Username of chat author is displayed in each chat message (+2pt)
-- [ ] Persist Logged in User (+1pt)
+- [X] Persist Logged in User (+1pt)
 
 The following **stretch** user stories are implemented:
 
