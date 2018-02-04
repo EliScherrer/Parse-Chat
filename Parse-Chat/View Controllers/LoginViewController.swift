@@ -7,13 +7,27 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //if the user is already logged in just push them along
+        if PFUser.current() != nil {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            })
+            print("someone is signed in")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +36,40 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //when the user clicks the sign up button
+    @IBAction func signUpClicked(_ sender: Any) {
+        // initialize a user object
+        let newUser = PFUser()
+        
+        // set user properties
+        newUser.username = usernameField.text
+        newUser.password = passwordField.text
+        
+        // call sign up function on the object
+        newUser.signUpInBackground { (success: Bool, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("User Registered successfully")
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
+    
     }
-    */
-
+    
+    //when the user clicks the login button
+    @IBAction func loginClicked(_ sender: Any) {
+        let username = usernameField.text ?? ""
+        let password = passwordField.text ?? ""
+        
+        PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
+            if let error = error {
+                print("User log in failed: \(error.localizedDescription)")
+            } else {
+                print("User logged in successfully")
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
+    }
+    
 }

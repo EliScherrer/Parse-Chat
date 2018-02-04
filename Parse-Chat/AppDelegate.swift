@@ -19,9 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
-            configuration.applicationId = "CodePath-Parse"
-            configuration.server = "http://45.79.67.127:1337/parse"
+            configuration.applicationId = "parse-chat"
+            configuration.server = "https://agile-taiga-76115.herokuapp.com/parse"
+            configuration.clientKey = "parsechatmasterkey"
         }))
+        
         
         return true
     }
