@@ -23,12 +23,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //adjust the table view
         tableView.dataSource = self
         tableView.delegate = self
-        //no grey lines between cells
-        self.tableView.separatorStyle = .none
+        //self.tableView.separatorStyle = .none //no grey lines between cells
         // Auto size row height based on cell autolayout constraints
         tableView.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 65
         
         //refresh data immediately and every 2 seconds
         onTimer()
@@ -43,6 +42,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
         let chatMessage = PFObject(className: "Message")
         chatMessage["text"] = messageField.text ?? ""
+        chatMessage["user"] = PFUser.current()
         
         chatMessage.saveInBackground { (success, error) in
             if success {
@@ -72,7 +72,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let object = parseObjects![indexPath.row]
         cell.messageLabel.text = object["text"] as? String
-        
+        cell.usernameLabel.text = (object["user"] as! PFUser).username        
         
         return cell
     }
@@ -80,6 +80,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //code to run periodicially
     @objc func onTimer() {
         let query = PFQuery(className: "Message")
+        query.includeKey("user")
         query.addDescendingOrder("createdAt")
         
         query.findObjectsInBackground { (objects, error) in
@@ -89,7 +90,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.tableView.reloadData()
                 
                 for object in self.parseObjects! {
-                    print(object["text"])
+                    print(object)
                 }
             } else {
                 print(error!)
