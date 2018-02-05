@@ -32,7 +32,7 @@ The following **additional** user stories are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![Imgur](https://i.imgur.com/lnq0xMp.gif)
+![Imgur](https://i.imgur.com/AGaHIp5.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
