@@ -57,7 +57,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let parsedbb = parseObjects {
-            print(parsedbb.count)
             return parsedbb.count
         }
         else {
@@ -72,7 +71,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let object = parseObjects![indexPath.row]
         cell.messageLabel.text = object["text"] as? String
-        cell.usernameLabel.text = (object["user"] as! PFUser).username        
+        cell.usernameLabel.text = (object["user"] as! PFUser).username
         
         return cell
     }
@@ -89,14 +88,23 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.parseObjects = objects
                 self.tableView.reloadData()
                 
-                for object in self.parseObjects! {
-                    print(object)
-                }
+//                for object in self.parseObjects! {
+//                    print(object)
+//                }
             } else {
                 print(error!)
             }
         }
     }
+    
+    //log the user out of parse and send them back to the login screen
+    @IBAction func logoutButtonClick(_ sender: Any) {
+        PFUser.logOut()
+        self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+    }
+    
+    
+    
     
     
     override func didReceiveMemoryWarning() {

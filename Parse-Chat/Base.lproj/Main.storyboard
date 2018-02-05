@@ -138,15 +138,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4Dx-5B-unV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Chat" id="WsU-mc-UQO"/>
+                    <navigationItem key="navigationItem" title="Chat" id="WsU-mc-UQO">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" style="plain" id="RP8-za-w3K">
+                            <connections>
+                                <action selector="logoutButtonClick:" destination="f9A-TX-g5N" id="nIo-oV-rKQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="messageField" destination="tXh-9M-5E2" id="jhy-b0-xDV"/>
                         <outlet property="tableView" destination="4va-AK-2ul" id="6vd-Ir-xpG"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="ZXo-NT-X8Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdB-e5-eFR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1648.8" y="53.523238380809602"/>
+            <point key="canvasLocation" x="1497" y="54"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bgy-Sc-aGn">
